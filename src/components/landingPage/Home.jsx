@@ -7,7 +7,18 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 
+// const menu [        
+//         name: Equalithon ＆ Team Selection,
+//         name: Team Area,
+//         name: Go to Slack,
+// ]
+
 const Home = () => {
+    
+        
+
+
+//     })
 
     return (
         <>

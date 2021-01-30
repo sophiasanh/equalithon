@@ -17,6 +17,11 @@ const RegistrationForm = props => {
 
     const { firstName, lastName, email, password } = data;
 
+    function foo() {
+        alert("Submit button clicked!");
+        return true;
+    }
+
     const onChangeHandler = e => {
         setData({
             ...data,
@@ -53,6 +58,7 @@ const RegistrationForm = props => {
     return (
         <>
             <Navigation />
+            <Button href="/home" size="lg" variant="info" className="cyan text-white home">Home</Button>
             <Form className="registrationForm" onSubmit={onSubmitHandler}>
                 <h5 className="cyan form-header text-white p-3 mb-3">Sign up</h5>
                 <Form.Group className="form-group">
@@ -78,7 +84,8 @@ const RegistrationForm = props => {
                         <Form.Label className="text-secondary form-label">Already signed up? <a className="text-secondary" href='/login'>Log in</a></Form.Label>
                     </Col>
                     <Col >
-                        <Button href="" variant="warning" className="yellow text-dark signup-button" type="submit">SIGN UP</Button>
+                        <Button href="/home" variant="warning" className="yellow text-dark signup-button" type="submit" value="submit" onclick="return foo()">SIGN UP</Button>
+
                     </Col>
                 </Row>
             </Form>

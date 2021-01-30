@@ -86,7 +86,25 @@ const RegistrationGroup = () => {
       console.log("Success:", JSON.stringify(json));
     } catch (error) {}
     document.getElementById("contact-form").reset();
-  };
+  
+    async function callingFn() {
+      try {
+          const response = await fetch("https://v1.nocodeapi.com/sophithedev/mailchimp/AnLrzxLcKvbHbzDf/lists?", {
+              method: "get",
+              headers: {
+                  "Content-Type": "application/json"
+              }
+          });
+          const json = await response.json();
+          console.log("Success:", JSON.stringify(json));
+      } catch (error) {
+          console.error("Error:", error);
+      }
+  }
+  
+  callingFn();
+  
+};
 
   return (
     <div>
