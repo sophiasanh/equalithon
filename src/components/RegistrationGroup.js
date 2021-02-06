@@ -3,6 +3,7 @@ import Navigation from "./landingPage/navigation/Navigation";
 import { Container } from "react-bootstrap";
 
 const RegistrationGroup = () => {
+  //const [email, setEmail] = useState("");
   const [countForm, setCountForm] = useState(1);
   const [data, setData] = useState({
     ifirstName1: "",
@@ -53,8 +54,40 @@ const RegistrationGroup = () => {
     setCountForm(count);
   };
 
+  const onSendClick = () => {
+    let newCountForm = countForm + 1;
+
+    setCountForm(newCountForm);
+  };
+
+  const onSkipClick = () => {
+    let newCountForm = countForm + 1;
+
+    setCountForm(newCountForm);
+  };
+
   const sendData = async (e) => {
     e.preventDefault();
+
+    async function callingFn() {
+      try {
+        const response = await fetch(
+          "https://v1.nocodeapi.com/sophithedev/mailchimp/zFnFfpHVYxNrznHn/members?list_id=5c5b621efb&email_address=<email_address>&status=subscribed",
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const json = await response.json();
+        console.log("Success:", JSON.stringify(json));
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
+    callingFn();
 
     try {
       const response = await fetch(
@@ -86,25 +119,7 @@ const RegistrationGroup = () => {
       console.log("Success:", JSON.stringify(json));
     } catch (error) {}
     document.getElementById("contact-form").reset();
-  
-    async function callingFn() {
-      try {
-          const response = await fetch("https://v1.nocodeapi.com/sophithedev/mailchimp/AnLrzxLcKvbHbzDf/lists?", {
-              method: "get",
-              headers: {
-                  "Content-Type": "application/json"
-              }
-          });
-          const json = await response.json();
-          console.log("Success:", JSON.stringify(json));
-      } catch (error) {
-          console.error("Error:", error);
-      }
-  }
-  
-  callingFn();
-  
-};
+  };
 
   return (
     <div>
@@ -130,6 +145,7 @@ const RegistrationGroup = () => {
                   className="form-control mb-2"
                   placeholder="First Name"
                   onChange={handleInput}
+                  //onChange={(e) => handleInput(e.target.name)}
                 ></input>
               </div>
               <div className="col-6">
@@ -139,6 +155,7 @@ const RegistrationGroup = () => {
                   className="form-control mb-2"
                   placeholder="Last Name"
                   onChange={handleInput}
+                  //onChange={(e) => handleInput(e.target.name)}
                 ></input>
               </div>
             </div>
@@ -148,7 +165,9 @@ const RegistrationGroup = () => {
               name="iemail1"
               className="form-control mb-2"
               placeholder="E-mail"
+              value={data.iemail1}
               onChange={handleInput}
+              //onChange={(e) => setData(e.target.value)}
             ></input>
 
             <input
@@ -157,6 +176,7 @@ const RegistrationGroup = () => {
               className="form-control mb-4"
               placeholder="Your invite message"
               onChange={handleInput}
+              //onChange={(e) => handleInput(e.target.name)}
             ></input>
           </div>
         )}
@@ -171,6 +191,7 @@ const RegistrationGroup = () => {
                   className="form-control mb-2"
                   placeholder="*First Name"
                   onChange={handleInput}
+                  //onChange={(e) => handleInput(e.target.name)}
                 ></input>
               </div>
               <div className="col-6">
@@ -180,6 +201,7 @@ const RegistrationGroup = () => {
                   className="form-control mb-2"
                   placeholder="*Last Name"
                   onChange={handleInput}
+                  //onChange={(e) => handleInput(e.target.name)}
                 ></input>
               </div>
             </div>
@@ -188,8 +210,10 @@ const RegistrationGroup = () => {
               type="email"
               name="iemail2"
               className="form-control mb-2"
-              placeholder="*E-mail"
+              placeholder="E-mail"
+              value={data.iemail2}
               onChange={handleInput}
+              //onChange={(e) => setData(e.target.value)}
             ></input>
 
             <input
@@ -197,6 +221,7 @@ const RegistrationGroup = () => {
               name="imessage2"
               className="form-control mb-4"
               placeholder="*Your invite message"
+              //onChange={(e) => handleInput(e.target.name)}
               onChange={handleInput}
             ></input>
           </div>
@@ -211,6 +236,7 @@ const RegistrationGroup = () => {
                   name="ifirstName3"
                   className="form-control mb-2"
                   placeholder="First Name"
+                  //onChange={(e) => handleInput(e.target.name)}
                   onChange={handleInput}
                 ></input>
               </div>
@@ -220,6 +246,7 @@ const RegistrationGroup = () => {
                   name="ilastName3"
                   className="form-control mb-2"
                   placeholder="Last Name"
+                  //onChange={(e) => handleInput(e.target.name)}
                   onChange={handleInput}
                 ></input>
               </div>
@@ -230,6 +257,8 @@ const RegistrationGroup = () => {
               name="iemail3"
               className="form-control mb-2"
               placeholder="E-mail"
+              //onChange={handleInput}
+              value={data.iemail3}
               onChange={handleInput}
             ></input>
 
@@ -238,29 +267,47 @@ const RegistrationGroup = () => {
               name="imessage3"
               className="form-control mb-4"
               placeholder="Your invite message"
+              //onChange={(e) => handleInput(e.target.name)}
               onChange={handleInput}
             ></input>
           </div>
         )}
 
         <button
-          onClick={onAddPeerClick}
-          disabled={countForm === 3 ? true : false}
+          type="submit"
+          value="submit"
           className="btn cyan mr-2"
+          disabled={countForm === 3 ? true : false}
+          onClick={onAddPeerClick}
         >
           Add Contact
         </button>
         <button
-          onClick={onDeleteClick}
-          disabled={countForm > 1 ? false : true}
+          type="submit"
+          value="submit"
           className="btn cyan"
+          disabled={countForm > 1 ? false : true}
+          onClick={onDeleteClick}
         >
           Delete Contact
         </button>
-        <button className="btn btn-warning float-right ">
+        <button
+          type="submit"
+          value="submit"
+          //href="/equalithon-selection"
+          className="btn btn-warning float-right"
+          onClick={onSendClick}
+        >
           Send and Check out teams!
         </button>
-        <button className="btn float-right border mr-2">Skip</button>
+        <button
+          type="submit"
+          value="submit"
+          className="btn float-right border mr-2"
+          onClick={onSkipClick}
+        >
+          Skip
+        </button>
       </form>
     </div>
   );

@@ -32,7 +32,7 @@ function App() {
         <Route path="/equalithon-info" exact component={EqualithonInfo} />
         <Route path="/contact" exact component={ContactUs} />
         <Route path="/feedback" exact component={Feedback} />
-        <Route path="/group-registration" exact component={RegistrationGroup} />
+        <Route path="/registration-group" exact component={RegistrationGroup} />
         <Route path="/sponsorship" exact component={Sponsorship} />
         <Route path="/sponsorhome" exact component={SponsorHome} />
         <Route path="/dandiregistration" exact component={DAndIRegistration} />
